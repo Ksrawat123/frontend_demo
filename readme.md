@@ -6,7 +6,7 @@
 
 4) setup Jenkins, github, webhook.
 
-5) Configuring flask appliation
+5) Configuring express appliation
 
 6) Push code to github 
 
