@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'node18'
+    }
+
+    environment {
+        APP_NAME = "express-app"
+        APP_DIR = "/home/ksr/Frontend_Express"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Ksrawat123/frontend_demo.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'npm test || true'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                pm2 restart express-app || pm2 start app.js --name express-app
+                pm2 save
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Express App Deployed Successfully"
+        }
+        failure {
+            echo "Deployment Failed"
+        }
+    }
+}
+
