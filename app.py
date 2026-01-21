@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from datetime import datetime
 import requests
 
-BACKEND_URL = 'http://backend:9000'
+BACKEND_URL = 'http://192.168.10.230:9000'
 
 # Flask app
 app = Flask(__name__)
